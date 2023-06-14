@@ -12,23 +12,23 @@ screen.fill("White")
 
 title_surface = custom_font.render("Sea battle", True, "Black")
 
-play_button_surface = pygame.Surface((300, 80))
+play_button_surface = pygame.Surface((300 / 1200 * WIDTH, 80))
 play_button_surface.fill((201, 199, 199))
 
-play_button_border = pygame.Surface((304, 84))
+play_button_border = pygame.Surface((304 / 1200 * WIDTH, 84))
 play_button_border.fill("Black")
 
 play_text = custom_font.render("Play", True, "Black")
-play_rect = play_text.get_rect(center=(950, 340))
+play_rect = play_text.get_rect(center=(WIDTH * 0.79, HEIGHT * 0.566))
 
-rules_button_surface = pygame.Surface((300, 80))
+rules_button_surface = pygame.Surface((300 / 1200 * WIDTH, 80))
 rules_button_surface.fill((201, 199, 199))
 
-rules_button_border = pygame.Surface((304, 84))
+rules_button_border = pygame.Surface((304 / 1200 * WIDTH, 84))
 rules_button_border.fill("Black")
 rules_button_text = custom_font.render("Rules", True, "Black")
-rules_button_text_rect = rules_button_text.get_rect(center=(950, 540))
-title_rect = title_surface.get_rect( center=(950, 50))
+rules_button_text_rect = rules_button_text.get_rect(center=(WIDTH * 0.79, HEIGHT * 0.9))
+title_rect = title_surface.get_rect( center=(WIDTH * 0.79, HEIGHT * 0.083))
 
 
 rules_surface = pygame.image.load("87743943.jpg").convert()

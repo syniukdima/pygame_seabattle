@@ -10,12 +10,12 @@ def gamemode_render(mode):
             screen.blit(rules_surface, (0, 0))
         else:
             screen.blit(banner_surface, (0, 0))
-        screen.blit(play_button_border, (WIDTH * 0.625 - 2, 0.5 * HEIGHT - 2))
-        screen.blit(play_button_surface, (WIDTH * 0.625, 0.5 * HEIGHT))
+        screen.blit(play_button_border, (WIDTH * 0.666 - 2, 0.513 * HEIGHT - 2))
+        screen.blit(play_button_surface, (WIDTH * 0.666, 0.513 * HEIGHT))
         screen.blit(play_text, play_rect)
 
-        screen.blit(rules_button_border, (WIDTH * 0.625 - 2, 0.83 * HEIGHT - 2))
-        screen.blit(rules_button_surface, (WIDTH * 0.625, 0.83 * HEIGHT))
+        screen.blit(rules_button_border, (WIDTH * 0.666 - 2, 0.85 * HEIGHT - 2))
+        screen.blit(rules_button_surface, (WIDTH * 0.666, 0.85 * HEIGHT))
         screen.blit(rules_button_text, rules_button_text_rect)
 
     if mode == "Preparation stage":
