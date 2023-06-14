@@ -29,3 +29,21 @@ class Product:
 obj = Product(30, "opys", [40, 34, 30])
 
 print(obj.dimensions)
+
+class User():
+    def __init__(self, name, second_name, mobile_phone):
+        if isinstance(name, str):
+            self.name = name
+        else:
+            self.name = " "
+        if isinstance(second_name, str):
+            self.second_name = second_name
+        else:
+            self.second_name = " "
+        if isinstance(mobile_phone, str):
+            self.mobile_phone = mobile_phone
+        else:
+            self.mobile_phone = " "
+
+user = User("Johnny", "Marshal", "+7864576857")
+print(user.second_name)
