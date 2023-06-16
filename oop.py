@@ -1,4 +1,4 @@
-"""Task #03
+"""
 Create a class that describes a Product of online store. As a Product fields you can use a price, description
 and product's dimensions.
 Create a class that describes a Customer. As a Customer fields you can use surname, name, patronymic, mobile phone, etc.
@@ -27,8 +27,9 @@ class Product:
 
 
 obj = Product(30, "opys", [40, 34, 30])
+obj1 = Product(40, "opys", [40, 34, 30])
+obj2 = Product(50, "opys", [40, 34, 30])
 
-print(obj.dimensions)
 
 class User():
     def __init__(self, name, second_name, mobile_phone):
@@ -46,4 +47,31 @@ class User():
             self.mobile_phone = " "
 
 user = User("Johnny", "Marshal", "+7864576857")
-print(user.second_name)
+
+class Order:
+
+    def __init__(self, user, products):
+        if isinstance(user, User):
+            self.user = user
+        else:
+            self.user = None
+
+        if all(isinstance(product, Product) for product in products):
+            self.products = products
+        else:
+            self.product = None
+    def calcPrice(self):
+
+        # sum = 0
+        # for product in self.products:
+        #     sum += product.price
+        # return sum
+
+        return sum(product.price for product in self.products)
+
+
+
+
+order1 = Order(user, [obj, obj1, obj2])
+print(order1.calcPrice())
+
