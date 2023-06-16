@@ -6,6 +6,12 @@ Create a class that describes an Order.
 - the order must contain data about the customer who carried it out and products.
 Implement a method for calculating the total order value. """
 
+obj1count = 2
+obj2count = 5
+obj3count = 1
+
+
+
 class Product:
 
     def __init__(self, price, desc, dimensions):
@@ -49,6 +55,8 @@ class User():
 user = User("Johnny", "Marshal", "+7864576857")
 
 class Order:
+    def obj_count(self, obj, obj1, obj2, obj1count, obj2count, obj3count):
+        return sum((obj.price * obj1count, obj1.price * obj2count, obj2.price * obj3count))
 
     def __init__(self, user, products):
         if isinstance(user, User):
@@ -60,18 +68,15 @@ class Order:
             self.products = products
         else:
             self.product = None
-    def calcPrice(self):
 
-        # sum = 0
-        # for product in self.products:
-        #     sum += product.price
-        # return sum
-
-        return sum(product.price for product in self.products)
 
 
 
 
 order1 = Order(user, [obj, obj1, obj2])
-print(order1.calcPrice())
+print(order1.obj_count(obj, obj1, obj2, obj1count, obj2count, obj3count))
+
+
+order1.obj_count(obj, obj1, obj2, obj1count, obj2count, obj3count)
+
 
