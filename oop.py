@@ -55,8 +55,16 @@ class User():
 user = User("Johnny", "Marshal", "+7864576857")
 
 class Order:
-    def obj_count(self, obj, obj1, obj2, obj1count, obj2count, obj3count):
-        return sum((obj.price * obj1count, obj1.price * obj2count, obj2.price * obj3count))
+    def obj_count(self, obj_dictionary):
+        summa = 0
+        for product, count in zip(obj_dictionary.keys(), obj_dictionary.values()):
+            summa += product.price * count
+        return summa
+
+
+    # obj_arr, obj_count_arr
+    # for i in range(0, len(obj_arr) + 1):
+    #    sum += obj_arr[i] * obj_count_arr[i]
 
     def __init__(self, user, products):
         if isinstance(user, User):
@@ -74,9 +82,10 @@ class Order:
 
 
 order1 = Order(user, [obj, obj1, obj2])
-print(order1.obj_count(obj, obj1, obj2, obj1count, obj2count, obj3count))
-
-
-order1.obj_count(obj, obj1, obj2, obj1count, obj2count, obj3count)
+print(order1.obj_count({
+    obj: obj1count,
+    obj2: obj2count,
+    obj1: obj3count
+}))
 
 
