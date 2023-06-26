@@ -42,5 +42,29 @@ ship_surface = pygame.transform.scale(ship_surface, (40, 160))
 ship_rect = ship_surface.get_rect(center=(400, 400))
 draggable = False
 
+class Ship(pygame.sprite.Sprite):
+    def __init__(self, length, start_position):
+        super().__init__()
+        self.image = pygame.image.load("ship.png").convert()
+        self.image = pygame.transform.scale(ship_surface, (40, 160))
+        self.rect = ship_surface.get_rect(center=start_position)
+        self.length = length
+
+
+player_ships = pygame.sprite.Group()
+
+player_ships.add(
+    Ship(4, (50, 400)),
+    Ship(3, (100, 400)),
+    Ship(3, (150, 400)),
+    Ship(2, (200, 400)),
+    Ship(2, (250, 400)),
+    Ship(2, (300, 400)),
+    Ship(1, (350, 400)),
+    Ship(1, (400, 400)),
+    Ship(1, (450, 400)),
+    Ship(1, (500, 400)),
+)
+
 is_rules_activated = False
 game_mode = "Menu"

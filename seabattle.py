@@ -22,11 +22,18 @@ def gamemode_render(mode):
         screen.fill("white")
         screen.blit(ship_surface, ship_rect)
 
+        player_ships.draw(screen)
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
+        for ship in player_ships:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("event")
