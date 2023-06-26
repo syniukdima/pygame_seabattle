@@ -33,7 +33,26 @@ while True:
 
         for ship in player_ships:
             if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = pygame.mouse.get_pos()
 
+
+                if ship_rect.collidepoint((x, y)) and ship.rect.x >= 0 and ship.rect.y >= 0:
+                    draggable = True
+                    offset_x = ship.rect.x - x
+                    offset_y = ship.rect.y - y
+            if event.type == pygame.MOUSEMOTION:
+                print(draggable)
+                print(ship.rect.left)
+                if ship.rect.left <= 0 or ship.rect.top <= 0 or ship.rect.right >= WIDTH or ship.rect.bottom >= HEIGHT:
+                    draggable = False
+                if draggable:
+                    x, y = event.pos
+                    ship.rect.x = offset_x + x
+                    ship.rect.y = offset_y + y
+            if event.type == pygame.MOUSEBUTTONUP:
+                draggable = False
+                ship.rect.left = 400
+                ship.rect.top = 400
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("event")
@@ -46,10 +65,7 @@ while True:
 
 
             print(ship_rect.collidepoint((x, y)))
-            if ship_rect.collidepoint((x, y)) and ship_rect.x >= 0 and ship_rect.y >= 0:
-                draggable = True
-                offset_x = ship_rect.x - x
-                offset_y = ship_rect.y - y
+
         if event.type == pygame.MOUSEMOTION:
             print(draggable)
             print(ship_rect.left)
