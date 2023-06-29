@@ -31,11 +31,15 @@ rules_button_text_rect = rules_button_text.get_rect(center=(WIDTH * 0.79, HEIGHT
 title_rect = title_surface.get_rect( center=(WIDTH * 0.79, HEIGHT * 0.083))
 
 
-rules_surface = pygame.image.load("87743943.jpg").convert()
+rules_surface = pygame.image.load("ship.png").convert()
 rules_surface = pygame.transform.scale(rules_surface, (WIDTH * 0.59, HEIGHT))
 
-banner_surface = pygame.image.load("pic662920.jpg").convert()
+banner_surface = pygame.image.load("87743943.jpg").convert()
 banner_surface = pygame.transform.scale(banner_surface, (WIDTH * 0.59, HEIGHT))
+time_set = pygame.USEREVENT+1
+pygame.time.set_timer(time_set, 300)
+
+
 
 class Ship(pygame.sprite.Sprite):
     def __init__(self, length, start_position):
@@ -48,17 +52,27 @@ class Ship(pygame.sprite.Sprite):
         self.offset_x = None
         self.offset_y = None
         self.draggable = None
+        self.orientation = "vertical"
+
 
     def apply_rotation(self):
 
         keys = pygame.key.get_pressed()
         x, y = pygame.mouse.get_pos()
+
         if keys[pygame.K_SPACE] and self.rect.collidepoint((x, y)):
             self.image = pygame.transform.rotate(self.image, 90)
+            if self.orientation == "vertical":
+                self.orientation = "horizontal"
+            elif self.orientation == "horizontal":
+                self.orientation = "vertical"
             self.rect = self.image.get_rect(center=(x, y))
 
+
+
     def update(self):
-        self.apply_rotation()
+        # self.apply_rotation()
+        pass
 
 player_ships = pygame.sprite.Group()
 
@@ -75,5 +89,4 @@ player_ships.add(
     Ship(1, (500, 400)),
 )
 
-is_rules_activated = False
 game_mode = "Menu"

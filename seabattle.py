@@ -1,6 +1,8 @@
 import pygame
 import sys
 from seabattles_assets import *
+ship_taken = False
+is_rules_activated = False
 
 
 def gamemode_render(mode):
@@ -30,13 +32,17 @@ while True:
             pygame.quit()
             sys.exit()
 
+
         for ship in player_ships:
 
             # movement mechanic
+            if event.type == time_set and ship_taken:
+                ship.apply_rotation()
             if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = pygame.mouse.get_pos()
                     if ship.rect.collidepoint((x, y)) and ship.rect.x >= 0 and ship.rect.y >= 0:
                         ship.draggable = True
+                        ship_taken = True
                         ship.offset_x = ship.rect.x - x
                         ship.offset_y = ship.rect.y - y
             if event.type == pygame.MOUSEMOTION:
@@ -48,12 +54,16 @@ while True:
                     ship.rect.y = ship.offset_y + y
             if event.type == pygame.MOUSEBUTTONUP:
                 ship.draggable = False
+                if ship.orientation == "horizontal":
+                    ship.image = pygame.transform.rotate(ship.image, 90)
+                    ship.orientation = "vertical"
+                    ship.rect = ship.image.get_rect(center=ship.start_position)
                 ship.rect.center = ship.start_position
 
 
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("event")
+            # print("event")
             x, y = pygame.mouse.get_pos()
             if 800 <= x <= 1100 and 500 <= y <= 580:
                 is_rules_activated = not is_rules_activated
