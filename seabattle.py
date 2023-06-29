@@ -20,10 +20,9 @@ def gamemode_render(mode):
 
     if mode == "Preparation stage":
         screen.fill("white")
-        screen.blit(ship_surface, ship_rect)
 
         player_ships.draw(screen)
-
+        player_ships.update()
 
 while True:
     for event in pygame.event.get():
@@ -32,27 +31,26 @@ while True:
             sys.exit()
 
         for ship in player_ships:
+
+            # movement mechanic
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = pygame.mouse.get_pos()
-
-
-                if ship_rect.collidepoint((x, y)) and ship.rect.x >= 0 and ship.rect.y >= 0:
-                    draggable = True
-                    offset_x = ship.rect.x - x
-                    offset_y = ship.rect.y - y
+                    x, y = pygame.mouse.get_pos()
+                    if ship.rect.collidepoint((x, y)) and ship.rect.x >= 0 and ship.rect.y >= 0:
+                        ship.draggable = True
+                        ship.offset_x = ship.rect.x - x
+                        ship.offset_y = ship.rect.y - y
             if event.type == pygame.MOUSEMOTION:
-                print(draggable)
-                print(ship.rect.left)
                 if ship.rect.left <= 0 or ship.rect.top <= 0 or ship.rect.right >= WIDTH or ship.rect.bottom >= HEIGHT:
-                    draggable = False
-                if draggable:
+                    ship.draggable = False
+                if ship.draggable:
                     x, y = event.pos
-                    ship.rect.x = offset_x + x
-                    ship.rect.y = offset_y + y
+                    ship.rect.x = ship.offset_x + x
+                    ship.rect.y = ship.offset_y + y
             if event.type == pygame.MOUSEBUTTONUP:
-                draggable = False
-                ship.rect.left = 400
-                ship.rect.top = 400
+                ship.draggable = False
+                ship.rect.center = ship.start_position
+
+
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("event")
@@ -61,24 +59,6 @@ while True:
                 is_rules_activated = not is_rules_activated
             if 800 <= x <= 1100 and 300 <= y <= 380: # clicked play
                 game_mode = "Preparation stage"
-
-
-
-            print(ship_rect.collidepoint((x, y)))
-
-        if event.type == pygame.MOUSEMOTION:
-            print(draggable)
-            print(ship_rect.left)
-            if ship_rect.left <= 0 or ship_rect.top <= 0 or ship_rect.right >= WIDTH or ship_rect.bottom >= HEIGHT:
-                draggable = False
-            if draggable:
-                x, y = event.pos
-                ship_rect.x = offset_x + x
-                ship_rect.y = offset_y + y
-        if event.type == pygame.MOUSEBUTTONUP:
-            draggable = False
-            ship_rect.left = 400
-            ship_rect.top = 400
 
     gamemode_render(game_mode)
 

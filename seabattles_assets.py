@@ -37,19 +37,28 @@ rules_surface = pygame.transform.scale(rules_surface, (WIDTH * 0.59, HEIGHT))
 banner_surface = pygame.image.load("pic662920.jpg").convert()
 banner_surface = pygame.transform.scale(banner_surface, (WIDTH * 0.59, HEIGHT))
 
-ship_surface = pygame.image.load("ship.png").convert()
-ship_surface = pygame.transform.scale(ship_surface, (40, 160))
-ship_rect = ship_surface.get_rect(center=(400, 400))
-draggable = False
-
 class Ship(pygame.sprite.Sprite):
     def __init__(self, length, start_position):
         super().__init__()
         self.image = pygame.image.load("ship.png").convert()
-        self.image = pygame.transform.scale(ship_surface, (40, 160))
-        self.rect = ship_surface.get_rect(center=start_position)
+        self.image = pygame.transform.scale(self.image, (40, 160))
+        self.rect = self.image.get_rect(center=start_position)
         self.length = length
+        self.start_position = start_position
+        self.offset_x = None
+        self.offset_y = None
+        self.draggable = None
 
+    def apply_rotation(self):
+
+        keys = pygame.key.get_pressed()
+        x, y = pygame.mouse.get_pos()
+        if keys[pygame.K_SPACE] and self.rect.collidepoint((x, y)):
+            self.image = pygame.transform.rotate(self.image, 90)
+            self.rect = self.image.get_rect(center=(x, y))
+
+    def update(self):
+        self.apply_rotation()
 
 player_ships = pygame.sprite.Group()
 
